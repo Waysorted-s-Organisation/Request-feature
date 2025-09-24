@@ -26,9 +26,9 @@ import { DropdownMenu, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
 
-const MyRequestCard = ({ request }) => {
+const MyReportCard = ({ request }) => {
 
-  const { editMyRequest, deleteMyRequest } = useMyRequest()
+    const { editMyRequest, deleteMyRequest } = useMyRequest()
 
   const [count, setCount] = useState(request.votes || 1)
   const [isUpvoted, setIsUpvoted] = useState(false)
@@ -37,33 +37,10 @@ const MyRequestCard = ({ request }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [tempDesc, setTempDesc] = useState(request.description)
 
-  const handleClick = () => {
-    if (isUpvoted) {
-      setCount((prev) => prev - 1)
-      setIsUpvoted(false)
-    } else {
-      setCount((prev) => prev + 1)
-      setIsUpvoted(true)
-    }
-  }
-
   const formattedCount = count.toString().padStart(2, "0")
 
   return (
     <div className="flex h-[109px] w-[791px] border-b border-gray-200 items-center">
-      {/* Upvote Box */}
-      <div
-        onClick={handleClick}
-        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
-          ${
-            isUpvoted
-              ? "border-[#265BD1] bg-[#E8EFFC]"
-              : "bg-white border-[#565A5E]"
-          }`}
-      >
-        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
-        <p className="text-black">{formattedCount}</p>
-      </div>
 
       {/* Request Info */}
       <div className="px-4 flex justify-between w-full">
@@ -234,4 +211,4 @@ const MyRequestCard = ({ request }) => {
   )
 }
 
-export default MyRequestCard
+export default MyReportCard

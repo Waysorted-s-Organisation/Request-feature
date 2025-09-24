@@ -5,6 +5,8 @@ const MyRequestContext = createContext()
 
 
 export const MyRequestProvider = ({ children }) => {
+    const [files, setFiles] = useState([])
+
     const [myRequests, setMyRequests] = useState([
         {
             id: "my-req-1",
@@ -28,9 +30,24 @@ export const MyRequestProvider = ({ children }) => {
         }
         setMyRequests((prev) => [...prev, requestWithId])
     }
+
+    // ✅ Edit existing request description
+    const editMyRequest = (id, newDescription) => {
+      setMyRequests((prev) =>
+        prev.map((req) =>
+          req.id === id ? { ...req, description: newDescription } : req
+        )
+      )
+    }
+
+    // ✅ Delete request
+    const deleteMyRequest = (id) => {
+      setMyRequests((prev) => prev.filter((req) => req.id !== id))
+    }
+
     
     return (
-        <MyRequestContext.Provider value={{ myRequests, addMyRequest }}>
+    <MyRequestContext.Provider value={{ files, setFiles, myRequests, addMyRequest, editMyRequest, deleteMyRequest }}>
       {children}
     </MyRequestContext.Provider>
   )
