@@ -5,7 +5,7 @@ import Main from '../components/Main'
 
 const Page = () => {
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div className="h-screen w-7xl flex flex-col">
       
       <div className="fixed top-0 left-0 w-full h-[68px] z-50">
         <Navbar />
