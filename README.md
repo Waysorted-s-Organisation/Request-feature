@@ -1,4 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Waysorted Feature Request Board
+
+This is a [Next.js](https://nextjs.org) project for managing feature requests, bug reports, comments, and upvotes, with authentication and admin features. It uses MongoDB for data storage and supports Google OAuth via NextAuth.
+
+---
+
+## Project Structure
+
+```
+.
+├── .env                      # Environment variables (MongoDB, NextAuth, Azure, etc.)
+├── components.json           # Component registry/config (if used)
+├── next.config.mjs           # Next.js configuration
+├── postcss.config.mjs        # PostCSS configuration
+├── tailwind.config.mjs       # Tailwind CSS configuration
+├── eslint.config.mjs         # ESLint configuration
+├── jsconfig.json             # JS project config for path aliases
+├── package.json              # NPM scripts and dependencies
+├── public/                   # Static assets (SVGs, PNGs, etc.)
+├── src/
+│   ├── app/                  # Next.js app directory (routing, pages, API routes)
+│   │   ├── api/              # API route handlers (auth, requests, comments, votes, etc.)
+│   │   ├── globals.css       # Global styles (Tailwind, custom CSS variables)
+│   │   ├── layout.js         # Root layout (providers, fonts)
+│   │   └── ...               # Other pages (e.g., /register, /yourRequest)
+│   ├── components/           # React UI components (Navbar, Sidebar, Card, Chat, etc.)
+│   ├── context/              # React context providers (Requests, Chat, MyRequests)
+│   ├── lib/                  # Utility libraries (DB connection, Azure upload, etc.)
+│   ├── models/               # Mongoose models (User, Request, Comment, Vote, Board, Notification)
+│   └── ...                   # Other source files
+└── ...
+```
+
+### Key Folders and Files
+
+- **src/app/api/**: API endpoints for authentication, requests, comments, votes, notifications, boards, and users.
+- **src/components/**: All UI components (including custom UI primitives and feature components).
+- **src/context/**: React context providers for managing state (requests, chat, etc.).
+- **src/models/**: Mongoose schemas for MongoDB collections.
+- **src/lib/**: Utility functions (database connection, Azure blob upload).
+- **public/**: Static assets (SVGs, images).
+- **tailwind.config.mjs**: Tailwind CSS theme and plugin configuration.
+- **.env**: Environment variables (must be created, see below).
+
+---
+
+## Scripts
+
+All scripts are defined in [package.json](package.json):
+
+| Script         | Description                          |
+| -------------- | ------------------------------------ |
+| `dev`          | Start the Next.js development server |
+| `build`        | Build the Next.js app for production |
+| `start`        | Start the production server          |
+| `lint`         | Run ESLint on the project            |
+
+Example:
+
+```sh
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Lint the codebase
+```
+
+---
+
+## Setup & Run
+
+### 1. Clone the Repository
+
+```sh
+git clone <your-repo-url>
+cd <repo-folder>
+```
+
+### 2. Install Dependencies
+
+```sh
+npm install
+# or
+yarn install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_nextauth_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+AZURE_STORAGE_CONNECTION_STRING=your_azure_blob_connection_string
+```
+
+> **Note:** You can get Google OAuth credentials from [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
+
+### 4. Run the Development Server
+
+```sh
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Deployment
+
+To deploy, build the app and use a Node.js server or a platform like [Vercel](https://vercel.com/):
+
+```sh
+npm run build
+npm run start
+```
+
+Or follow the [Vercel deployment guide](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+---
+
+## Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Radix UI Primitives](https://www.radix-ui.com/docs/primitives/overview/introduction)
+- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction)
+- [Mongoose Documentation](https://mongoosejs.com/docs/guide.html)
+
+---This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
