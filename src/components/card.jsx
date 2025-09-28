@@ -8,6 +8,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Chat from "./chat";
+import { EllipsisIcon } from "lucide-react";
+import Dropdown from "daisyui/components/dropdown";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuItem } from "./ui/dropdown-menu";
 
 const Card = ({ title, description, details, status, votes }) => {
   const [count, setCount] = useState(votes || 1);
@@ -44,7 +48,7 @@ const Card = ({ title, description, details, status, votes }) => {
         <SheetTrigger asChild>
           <div className="px-4 cursor-pointer">
             {/* Title  */}
-            <h1 className="font-semibold text-sm">{title}</h1>
+            <h1 className="font-semibold text-sm text-black">{title}</h1>
             {/* Description  */}
             <p className="text-xs text-[#565A5E]">{description}</p>
 
@@ -66,6 +70,7 @@ const Card = ({ title, description, details, status, votes }) => {
             <SheetDescription asChild className="ml-5">
               <div className="flex flex-col gap-4 my-1">
                 <div className="flex h-[109px] w-full items-center">
+
                   <div className="w-[54px] h-[54px] bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
                     <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
                     <p className="text-black">01</p>
@@ -73,7 +78,7 @@ const Card = ({ title, description, details, status, votes }) => {
 
                   <div className="px-4 flex justify-between w-full">
                     <div>
-                      <h1 className="font-semibold text-sm">
+                      <h1 className="font-semibold text-sm text-black">
                         {title}
                       </h1>
                       <p className="text-xs text-[#565A5E]">
@@ -88,6 +93,23 @@ const Card = ({ title, description, details, status, votes }) => {
                       </div>
                     </div>
                   </div>
+
+                  <div className="mr-2 cursor-pointer">
+                     <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="border px-1 py-1 rounded-sm flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
+                            <EllipsisIcon />
+                          </button>
+                        </DropdownMenuTrigger>
+                  
+                        <DropdownMenuContent className={" cursor-pointer border border-gray-200 shadow-md rounded-md mt-2 mr-5"}>
+                          <DropdownMenuItem className="px-3 pr-3 py-1 hover:bg-[#E8EFFC] rounded-md ">
+                            Copy Link
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                  </div>
+
                 </div>
 
                 <p className="mb-2 border-b pb-3 border-gray-200">

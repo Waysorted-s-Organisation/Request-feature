@@ -25,8 +25,9 @@ import {  EllipsisIcon } from "lucide-react"
 import { DropdownMenu, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
+import { Separator } from "./ui/separator"
 
-const MyRequestCard = ({ request }) => {
+const MyRequestCard = ({ request, showManageText = false  }) => {
 
   const { editMyRequest, deleteMyRequest } = useMyRequest()
 
@@ -89,15 +90,16 @@ const MyRequestCard = ({ request }) => {
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="hover:bg-[#E8EFFC] hover:text-[#265BD1]"
+                className="hover:bg-[#E8EFFC] hover:text-[#265BD1] cursor-pointer"
               >
-                <EllipsisIcon />
+                {showManageText ? "Manage Request" : <EllipsisIcon />}
               </Button>
             </SheetTrigger>
             <SheetContent className="w-[640px] sm:max-w-[750px] rounded-l-lg">
               <SheetHeader>
                 <SheetTitle className="mt-20 ml-5 text-sm text-[#565A5E]">
-                  {request.date}
+                  {request.date}       
+                  {/* update the date and add "updated on" in front of the updated date  */}
                 </SheetTitle>
                 <SheetDescription asChild className="ml-5">
                   <div className="flex flex-col gap-4 my-1">
@@ -110,14 +112,17 @@ const MyRequestCard = ({ request }) => {
 
                       <div className="px-4 flex justify-between w-full">
                         <div>
-                          <h1 className="font-semibold text-sm">
+                          <h1 className=" text-black font-semibold text-sm">
                             {request.title}
                           </h1>
                           <p className="text-xs text-[#565A5E]">
                             {request.details}
                           </p>
 
-                          <div className="flex items-center gap-2 mt-3">
+                          <div   className={`flex items-center gap-2 mt-3 transition-opacity duration-300 ${
+                                            isEditing ? "opacity-50" : "opacity-100"
+                                          }`}
+                          >
                             <button className="text-xs text-[#565A5E] rounded-md bg-[#F3F3F3] px-2 py-1 items-center flex gap-1">
                               <i className="fa-solid fa-square text-[6px]"></i>
                               Your request
@@ -132,7 +137,7 @@ const MyRequestCard = ({ request }) => {
                         <div className="flex items-center mr-5 p-2 rounded-md  w-[36px] h-[36px]">
                           <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] gap-2 focus:outline-none focus:ring-0">
+                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] hover:bg-[#F3F3F3] gap-2 focus:outline-none focus:ring-0">
                             <EllipsisIcon />
                           </button>
                         </DropdownMenuTrigger>
@@ -141,6 +146,7 @@ const MyRequestCard = ({ request }) => {
                           <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
+
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <DropdownMenuItem
@@ -151,16 +157,19 @@ const MyRequestCard = ({ request }) => {
                               </DropdownMenuItem>
                             </AlertDialogTrigger>
                           
-                            <AlertDialogContent>
+                            <AlertDialogContent className={"m-0 p-0"}>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Delete Requested Feature</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  Are you sure you want to delete this request? This will permanently
-                                  remove it and you’ll need to resubmit if required.
+                                <AlertDialogTitle className={"text-sm text-gray-500 p-3"}>Delete Requested Feature</AlertDialogTitle>
+                                <Separator/>
+                                <AlertDialogDescription className={"text-black font-semibold p-3"}>
+                                  Are you sure you want to delete this request? This will delete your
+                                  request and you have to resubmit the request
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
+
+                              <Separator/>
                           
-                              <AlertDialogFooter>
+                              <AlertDialogFooter className={"p-3"}>
                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                                 <AlertDialogAction
                                   className="bg-red-500 hover:bg-red-600 text-white"
@@ -171,6 +180,10 @@ const MyRequestCard = ({ request }) => {
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
+
+                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md">
+                            Copy link
+                          </DropdownMenuItem>
 
                         </DropdownMenuContent>
                 </DropdownMenu>
@@ -190,15 +203,18 @@ const MyRequestCard = ({ request }) => {
                             rows={3}
                           />
                           <div className="flex justify-end gap-2">
+
                             <Button
                               onClick={() => {
-                                editMyRequest(request.id, tempDesc)
-                                setIsEditing(false)
+                                editMyRequest(request.id, tempDesc); // updates desc + date
+                                setIsEditing(false);
                               }}
-                              className={"bg-[#265BD1] text-white px-5"}
+                              className="bg-[#265BD1] text-white px-5"
                             >
                               Save
                             </Button>
+
+
                             <Button
                               onClick={() => {
                                 setTempDesc(request.description)

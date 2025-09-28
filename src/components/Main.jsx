@@ -53,7 +53,7 @@ const Main = () => {
             <div className='flex text-sm items-center mt-4 gap-2'>
 
                 <p>Show</p>
-                 <DropdownMenu open={open} onOpenChange={setOpen}>
+                 <DropdownMenu open={open} onOpenChange={setOpen} className={"cursor-pointer"}>
                         <DropdownMenuTrigger asChild>
                           <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] gap-2 focus:outline-none focus:ring-0">
                             {selected}
@@ -64,7 +64,7 @@ const Main = () => {
                           </button>
                         </DropdownMenuTrigger>
                   
-                        <DropdownMenuContent>
+                        <DropdownMenuContent className={"cursor-pointer"}>
                           <DropdownMenuItem onClick={() => setSelected("Most votes")}>
                             Most votes
                           </DropdownMenuItem>
@@ -113,7 +113,7 @@ const Main = () => {
                 // myRequests.map((req) => (
                 //   <MyRequestCard key={req.id} request={req} />
                 // ))
-                <MyRequestCard key={myRequests.at(-1).id} request={myRequests.at(-1)} />
+                <MyRequestCard key={myRequests.at(-1).id} request={myRequests.at(-1)}  showManageText={true}/>
 
               )}
             </div>

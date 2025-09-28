@@ -47,13 +47,13 @@ const Chat = () => {
                 </div>
 
                 {/* Comment Box */}
-                <div className="p-3 rounded-md bg-gray-100 text-sm w-full relative">
+                <div className="p-3 rounded-md bg-white border text-sm w-full relative">
                   <p className="text-gray-800">{c.text}</p>
-                  <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
+                  <div className="text-xs text-black mt-1 flex items-center gap-2">
                     {c.time} ·{" "}
                     <button
                       onClick={() => setReplyingTo(c.id)}
-                      className="text-[#2575d6] text-xs hover:underline"
+                      className="hover:text-[#2575d6] text-black text-xs hover:underline"
                     >
                       Reply
                     </button>

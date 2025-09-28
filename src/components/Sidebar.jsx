@@ -2,10 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Sidebar = ({ hideFeatures = false }) => {
   const router = useRouter();
+  const pathname = usePathname(); // ✅ Get current route
+
+  const isHome = pathname === "/"; // Check if user is on home page
 
   return (
     <div className="bg-white h-[calc(100vh-68px)] w-[225px] z-50 border-r border-gray-200 p-5 flex flex-col justify-between ">
@@ -16,7 +19,7 @@ const Sidebar = ({ hideFeatures = false }) => {
           className="text-sm text-[#565A5E] p-2 flex items-center my-3 cursor-pointer rounded-md hover:bg-[#E8EFFC] hover:text-[#265BD1]"
         >
           <ChevronLeft size={16} />
-          <p>Back home</p>
+          <p>{isHome ? "Back home" : "Go back"}</p>
         </div>
 
         {/* ✅ Conditionally render Features Board */}
@@ -38,7 +41,7 @@ const Sidebar = ({ hideFeatures = false }) => {
         )}
       </div>
 
-      <Button className="bg-[#265BD1] w-fit">Have query ?</Button>
+      <Button className="bg-[#265BD1] w-fit hover:bg-[#1F4AA9] cursor-pointer">Have query ?</Button>
     </div>
   );
 };

@@ -23,21 +23,61 @@ import { useRouter } from "next/navigation"
 // ---- Placeholder for your upload component ----
 const BugUploadDialog = ({ open, onOpenChange }) => {
   const { files, setFiles } = useMyRequest()
-  // const [files, setFiles] = useState([])
   const [uploading, setUploading] = useState(false)
   const [successOpen, setSuccessOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
 
-  // 🔑 Reset when dialog opens
   useEffect(() => {
     if (open) {
       setFiles([])
       setUploading(false)
+      setProgress(0)
     }
   }, [open])
 
+  function startMockUpload() {
+    setUploading(true)
+    setProgress(0)
+    // simulate upload progress (0 → 100)
+    const timer = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
+          clearInterval(timer)
+          return 100
+        }
+        return p + 10
+      })
+    }, 150)
+    setTimeout(() => setUploading(false), 1500)
+  }
+
   function handleFiles(e) {
-    const newFiles = Array.from(e.target.files)
-    setFiles(prev => [...prev, ...newFiles].slice(0, 2))
+    const newFiles = Array.from(e.target.files).slice(0, 2)
+    setFiles(newFiles)
+      if (newFiles.length) {startMockUpload()}
+    // if (newFiles.length) {
+    //   setUploading(true)
+    //   // simulate upload progress
+    //   setTimeout(() => setUploading(false), 1500)
+    // }
+  }
+
+  const handleSubmit = () => {
+    setUploading(true)
+    setProgress(0)
+    const timer = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
+          clearInterval(timer)
+          setUploading(false)
+          onOpenChange(false)
+          setSuccessOpen(true)
+          return 100
+        }
+        return p + 10
+      })
+    }, 150)
+    // 🔑 send files to backend here when progress completes
   }
 
   return (
@@ -54,8 +94,8 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
         <div className="flex flex-col gap-4">
           <p className="text-sm font-medium">Upload and attach files</p>
 
-          {/* Upload box */}
-          <label className="flex flex-col bg-[#F3F3F3] items-center justify-center border-2 border-dashed border-[#CFD0D1] rounded-md p-6 text-sm cursor-pointer hover:border-blue-400 transition">
+          {/* Upload Box */}
+          <label className="flex flex-col w-[399px] h-[124px] bg-[#F3F3F3] items-center justify-center border-2 border-dashed border-[#CFD0D1] rounded-md p-6 text-sm cursor-pointer hover:border-blue-400 transition">
             <input
               type="file"
               multiple
@@ -64,98 +104,102 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
               onChange={handleFiles}
             />
             <img src="/upload.png" alt="" className="py-4"/>
-            <p className="text-[#265BD1]">Click to Upload <span className="text-[#565A5E]">an Image</span></p>
+            <p className="text-[#265BD1]">
+              Click to Upload <span className="text-[#565A5E]">an Image</span>
+            </p>
             <span className="text-gray-400 text-xs">(Max. file size 25 MB)</span>
           </label>
 
-          {files.length > 0 && (
-            <div className="space-y-2 w-full">
-              
-              {uploading ? (
-                <>
-                  <p className="text-sm text-gray-500">
+          {/* Fixed height for info or uploaded files */}
+          <div className="h-[140px] w-full flex flex-col justify-center">
+            {files.length === 0 ? (
+              <div className="flex flex-col items-center text-xs text-gray-400">
+                <p>you can upload up to 2 photos to show what</p>
+                <p>went wrong</p>
+              </div>
+            ) : (
+              <div className="space-y-2 w-full">
+                {uploading && (
+                  <p className="text-sm mt-2 text-gray-500">
                     {files.length} files uploading...
                   </p>
-                  {files.map((file, idx) => (
-                    <div
-                      key={idx}
-                      className="border rounded-md p-2 flex flex-col items-start justify-between text-sm"
-                    >
-                      <div className="flex items-start gap-2 mb-1">
-                        <img src="/upload.png" alt=""/>
-                        {file.name}
-                      </div>
-                        {file.size && (
-                          <p className="text-xs text-gray-400 mb-1">
-                            {(file.size / 1024).toFixed(2)} KB
-                          </p>
-                        )}
-                      <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-1 bg-[#265BD1] w-[100%]" />
-                      </div>
-                    </div>
-                  ))}
-                </>
-              ) : (
+                )}
                 <div className="flex flex-col gap-2">
                   {files.map((file, idx) => (
                     <div
                       key={idx}
-                      className="border rounded-md p-2 flex items-start justify-between text-sm"
+                      className="border rounded-md p-2 flex items-start justify-between text-sm w-full"
                     >
-                      <div className="flex-col items-center gap-2">
-                        <div className="flex items-center gap-2 mb-2 ">
-                          <img src="./upload.png" alt="" />
+                      <div className="flex-col w-full items-center gap-2">
+                        <div className="flex items-center gap-2 mb-2">
+                          <img src="/upload.png" alt="" />
                           {file.name}
                         </div>
                         {file.size && (
-                          <p className="text-xs text-gray-400 mb-1">
-                            {(file.size / 1024).toFixed(2)} KB
+                          <p className="text-xs text-gray-400 mb-1 flex justify-between items-center">
+                            {(file.size / 1024).toFixed(2)} KB • Uploaded
+                            <span className=" text-xs text-gray-600">
+                              {progress}%
+                            </span>
                           </p>
                         )}
+                        {/* <div className=" relative w-full h-1 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            className={`absolute h-1 bg-[#265BD1] transition-all duration-500 ${
+                              uploading ? "w-[70%]" : "w-[100%]"
+                            }`}
+                          />
+                        </div> */}
+                        
+                        <div className="relative w-full h-1 bg-gray-200 rounded-full overflow-hidden">
+                        <div
+                          className="absolute left-0 top-0 h-full bg-[#265BD1] transition-all duration-150"
+                          style={{ width: `${progress}%` }} 
+                        />
+                        
+                      </div>
                       </div>
                       <button
                         onClick={() =>
                           setFiles(files.filter((_, i) => i !== idx))
                         }
-                        className="text-black text-xs"
+                        className="text-black text-xs ml-2"
                       >
                         ✕
                       </button>
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
-          <div className="flex justify-between mt-2">
-            <Button
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-              className="w-1/2 mr-2"
-            >
-              Skip for now
-            </Button>
-            <Button
-              className="bg-[#265BD1] w-1/2"
-              onClick={() => {
-                setUploading(true)
-                setTimeout(() => {
-                  setUploading(false)
-                  onOpenChange(false)
-                }, 2000)
-                setSuccessOpen(true)
-              }}
-            >
-              Submit report
-            </Button>
+          {/* Action Buttons */}
+          <div className="flex justify-between mt-2 w-full">
+            {files.length === 0 ? (
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => onOpenChange(false)}
+              >
+                Skip for now
+              </Button>
+            ) : (
+              <Button
+                className="bg-[#265BD1] w-1/2"
+                disabled={uploading}
+                onClick={handleSubmit}
+              >
+                {uploading ? "Uploading..." : "Submit report"}
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>
     </Dialog>
   )
 }
+
 // -----------------------------------------------
 
 const Navbar = () => {
@@ -176,7 +220,7 @@ const Navbar = () => {
       <div><img src="/Waysorted.svg" alt="logo" /></div>
 
       <div className="flex items-center gap-1">
-        <button className="border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center">
+        <button className="border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer">
           <Sun size={16} />
         </button>
 
@@ -191,7 +235,7 @@ const Navbar = () => {
         {/* Main Request Dialog */}
         <Dialog open={mainOpen} onOpenChange={setMainOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-[#265BD1] text-white">
+            <Button className="bg-[#265BD1] text-white hover:bg-[#1F4AA9] cursor-pointer">
               <PlusIcon size={12} /> Request a feature
             </Button>
           </DialogTrigger>
@@ -287,14 +331,14 @@ const Navbar = () => {
 
         {/* Success dialog (feature only) */}
         <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
-          <DialogContent className="max-w-md text-center">
+          <DialogContent className="max-w-[453px] h-[300px] text-center">
             <DialogHeader>
               <DialogTitle className="text-sm text-[#565A5E]">
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
             <Separator />
-            <div className="flex flex-col items-center space-y-4 py-6">
+            <div className="flex flex-col items-center ">
               <img
                 src="/success.svg"
                 alt="Success"
@@ -305,18 +349,25 @@ const Navbar = () => {
                 Your request has been added to <b>My Requests</b>.
               </p>
             </div>
-            <div className="bg-[#E8EFFC] w-full p-2 rounded-md text-sm text-gray-600">
+            <div className="bg-[#E8EFFC] w-full p-1 rounded-md text-sm text-gray-600 items-center mt-4">
                     You can{" "}
                     <a onClick={() => router.push("/yourRequest")} className="cursor-pointer text-[#265BD1]">
                       click here
                     </a>{" "}
                     to track the status of your request
-                  </div>
+            </div>
           </DialogContent>
         </Dialog>
 
         {/* Bug upload dialog */}
-        <BugUploadDialog open={bugDialogOpen} onOpenChange={setBugDialogOpen} />
+        <BugUploadDialog
+          open={bugDialogOpen}
+          onOpenChange={(v) => {
+            // Defer update to avoid "update during render"
+            setTimeout(() => setBugDialogOpen(v), 0);
+          }}
+        />
+
 
         <Notification />
         <ProfileDropdown />

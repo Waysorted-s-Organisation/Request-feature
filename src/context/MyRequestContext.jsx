@@ -31,14 +31,34 @@ export const MyRequestProvider = ({ children }) => {
         setMyRequests((prev) => [...prev, requestWithId])
     }
 
-    // ✅ Edit existing request description
-    const editMyRequest = (id, newDescription) => {
+    // ✅ Edit existing request description + update date
+    const editMyRequest = (id, updates) => {
+      const now = new Date();
+      const formattedDate = `Updated on ( ${now.toLocaleString("en-US", {
+        month: "long",   // January
+        day: "numeric",  // 26
+        year: "numeric", // 2024
+        hour: "2-digit", // 02
+        minute: "2-digit",
+        hour12: true,    // AM/PM
+      })} )`;
+    
       setMyRequests((prev) =>
         prev.map((req) =>
-          req.id === id ? { ...req, description: newDescription } : req
+          req.id === id
+            ? {
+                ...req,
+                ...(typeof updates === "string"
+                  ? { description: updates }
+                  : updates),
+                date: formattedDate,
+              }
+            : req
         )
-      )
-    }
+      );
+    };
+
+
 
     // ✅ Delete request
     const deleteMyRequest = (id) => {
