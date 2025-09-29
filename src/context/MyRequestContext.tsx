@@ -91,7 +91,7 @@ export const MyRequestProvider: React.FC<{ children: ReactNode }> = ({ children 
       addMyRequest,
       editMyRequest,
       deleteMyRequest,
-    }), [files, myRequests]);
+    }), [files, myRequests, addMyRequest, editMyRequest, deleteMyRequest]);
     
     return (
     <MyRequestContext.Provider value={contextValue}>

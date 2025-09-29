@@ -27,7 +27,22 @@ import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
 import { Separator } from "./ui/separator"
 
-const MyRequestCard = ({ request, showManageText = false  }) => {
+interface MyRequest {
+  id: string;
+  title: string;
+  description: string;
+  details: string;
+  status: string;
+  votes: number;
+  date: string;
+}
+
+interface MyRequestCardProps {
+  request: MyRequest;
+  showManageText?: boolean;
+}
+
+const MyRequestCard = ({ request, showManageText = false }: MyRequestCardProps) => {
 
   const { editMyRequest, deleteMyRequest } = useMyRequest()
 
@@ -96,7 +111,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
               </Button>
             </SheetTrigger>
             <SheetContent className="w-[640px] sm:max-w-[750px] rounded-l-lg">
-              <SheetHeader>
+              <SheetHeader className="">
                 <SheetTitle className="mt-20 ml-5 text-sm text-[#565A5E]">
                   {request.date}       
                   {/* update the date and add "updated on" in front of the updated date  */}
@@ -158,19 +173,19 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                             </AlertDialogTrigger>
                           
                             <AlertDialogContent className={"m-0 p-0"}>
-                              <AlertDialogHeader>
+                              <AlertDialogHeader className="">
                                 <AlertDialogTitle className={"text-sm text-gray-500 p-3"}>Delete Requested Feature</AlertDialogTitle>
-                                <Separator/>
+                                <Separator className=""/>
                                 <AlertDialogDescription className={"text-black font-semibold p-3"}>
                                   Are you sure you want to delete this request? This will delete your
                                   request and you have to resubmit the request
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
 
-                              <Separator/>
+                              <Separator className=""/>
                           
                               <AlertDialogFooter className={"p-3"}>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogCancel className="">Cancel</AlertDialogCancel>
                                 <AlertDialogAction
                                   className="bg-red-500 hover:bg-red-600 text-white"
                                   onClick={() => deleteMyRequest(request.id)}

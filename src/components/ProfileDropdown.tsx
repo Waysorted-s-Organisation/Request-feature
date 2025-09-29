@@ -22,7 +22,7 @@ export default function ProfileDropdown() {
 
       <DropdownMenuContent className="w-58 mr-2 p-1">
         {/* Username + Email */}
-        <DropdownMenuLabel className="flex flex-col items-start">
+        <DropdownMenuLabel className="flex flex-col items-start" inset={false}>
           <div className="flex gap-2">
 
             <div className="w-[36px] h-[36px] text-[#265BD1] bg-[#E8EFFC] rounded-md flex items-center justify-center">RG</div>
@@ -33,7 +33,7 @@ export default function ProfileDropdown() {
             </div>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="" />
 
         {/* Workspace */}
         <div className="px-2 py-2">
@@ -48,19 +48,19 @@ export default function ProfileDropdown() {
             </div>
           </div>
         </div>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="" />
 
         {/* Profile Options */}
-        <DropdownMenuItem>
+        <DropdownMenuItem className="" inset={false}>
           <Settings className="mr-2 h-4 w-4" /> Account settings
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => {router.push('/yourRequest')}}>
+        <DropdownMenuItem className="" inset={false} onClick={() => {router.push('/yourRequest')}}>
           <FileText className="mr-2 h-4 w-4" /> Your requests
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="" inset={false}>
           <HelpCircle className="mr-2 h-4 w-4" /> Help
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="" inset={false}>
           <LogOut className="mr-2 h-4 w-4 text-red-500" /> Logout
         </DropdownMenuItem>
       </DropdownMenuContent>

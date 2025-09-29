@@ -56,8 +56,8 @@ const BugUploadDialog: React.FC<BugUploadDialogProps> = ({ open, onOpenChange })
     setTimeout(() => setUploading(false), 1500)
   }
 
-  function handleFiles(e) {
-    const newFiles = Array.from(e.target.files).slice(0, 2)
+  function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    const newFiles = Array.from(e.target.files || []).slice(0, 2)
     setFiles(newFiles)
       if (newFiles.length) {startMockUpload()}
     // if (newFiles.length) {
@@ -88,13 +88,13 @@ const BugUploadDialog: React.FC<BugUploadDialogProps> = ({ open, onOpenChange })
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
-        <DialogHeader>
+        <DialogHeader className="">
           <DialogTitle className="text-sm text-[#565A5E]">
             Request a feature or report a bug
           </DialogTitle>
         </DialogHeader>
 
-        <Separator />
+        <Separator className="" />
 
         <div className="flex flex-col gap-4">
           <p className="text-sm font-medium">Upload and attach files</p>
@@ -232,6 +232,7 @@ const Navbar = () => {
         <div className="flex items-center hover:bg-[#F3F3F3] border rounded-md w-[241px] h-[36px] px-2">
           <SearchIcon size={16} />
           <Input
+            type="text"
             placeholder="Search..."
             className="border-none shadow-none px-1 focus:outline-none focus:ring-0 focus-visible:ring-0"
           />
@@ -245,13 +246,13 @@ const Navbar = () => {
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
-            <DialogHeader>
+            <DialogHeader className="">
               <DialogTitle className="text-sm text-[#565A5E]">
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
 
-            <Separator />
+            <Separator className="" />
 
             <div className="space-y-4">
               <div className="space-y-2">
@@ -262,49 +263,50 @@ const Navbar = () => {
                   className="flex items-center gap-6"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="feature" id="feature" />
-                    <Label htmlFor="feature">Request a feature</Label>
+                    <RadioGroupItem value="feature" id="feature" className="" />
+                    <Label htmlFor="feature" className="">Request a feature</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="bug" id="bug" />
-                    <Label htmlFor="bug">Report a Bug</Label>
+                    <RadioGroupItem value="bug" id="bug" className="" />
+                    <Label htmlFor="bug" className="">Report a Bug</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               <div className="space-y-2">
-                <Label>Select Board</Label>
+                <Label className="">Select Board</Label>
                 <Select>
                   <SelectTrigger className="w-full bg-[#F3F3F3]">
                     <SelectValue placeholder="Figma Plugin" />
                   </SelectTrigger>
                   <SelectContent className="w-full">
-                    <SelectItem value="figma">Figma Plugin</SelectItem>
-                    <SelectItem value="web">Web App</SelectItem>
-                    <SelectItem value="mobile">Mobile App</SelectItem>
+                    <SelectItem value="figma" className="">Figma Plugin</SelectItem>
+                    <SelectItem value="web" className="">Web App</SelectItem>
+                    <SelectItem value="mobile" className="">Mobile App</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="title">
+                <Label htmlFor="title" className="">
                   {type === "bug" ? "Issue" : "Title"}
                 </Label>
                 <Input
+                  type="text"
                   id="title"
                   className="bg-[#F3F3F3]"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="desc">Description</Label>
+                <Label htmlFor="desc" className="">Description</Label>
                 <Textarea
                   id="desc"
                   className="bg-[#F3F3F3]"
                   value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDesc(e.target.value)}
                 />
               </div>
 
@@ -337,12 +339,12 @@ const Navbar = () => {
         {/* Success dialog (feature only) */}
         <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
           <DialogContent className="max-w-[453px] h-[300px] text-center">
-            <DialogHeader>
+            <DialogHeader className="">
               <DialogTitle className="text-sm text-[#565A5E]">
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
-            <Separator />
+            <Separator className="" />
             <div className="flex flex-col items-center ">
               <img
                 src="/success.svg"
