@@ -9,7 +9,7 @@ const Notification = () => {
     <div>
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className='border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer'><Bell size={16}/> </button>
+              <button className='border bg-white p-1 hover:bg-[#E8EFFC] rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer'><Bell size={16}/> </button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className='p-2 items-center flex justify-center'>

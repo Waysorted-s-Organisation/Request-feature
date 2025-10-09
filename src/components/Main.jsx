@@ -48,21 +48,30 @@ const Main = () => {
   return (
     <div className='h-[calc(100vh-68px)] flex-1 flex flex-col z-50 m-5'>
 
-        <div className='flex justify-between items-center mr-5 mb-6'>
+      {/* should be fixed at given position and non-scrollable  */}
+
+        <div id='fixed-header' className='flex justify-between items-center mr-5 mb-6 sticky top-0 bg-white z-50'>
 
             <div className='flex text-sm items-center mt-4 gap-2'>
 
                 <p>Show</p>
                  <DropdownMenu open={open} onOpenChange={setOpen} className={"cursor-pointer"}>
                         <DropdownMenuTrigger asChild>
-                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] gap-2 focus:outline-none focus:ring-0">
+                          <button
+                            className={`border px-2 py-1 rounded-sm flex items-center gap-2 focus:outline-none focus:ring-0 transition-colors duration-200 ${
+                              open ? "bg-gray-100" : "bg-transparent"
+                            } hover:text-[#265BD1]`}
+                          >
                             {selected}
                             <ChevronDown
                               size={16}
-                              className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+                              className={`transition-transform duration-300 ${
+                                open ? "rotate-180" : ""
+                              }`}
                             />
                           </button>
                         </DropdownMenuTrigger>
+
                   
                         <DropdownMenuContent className={"cursor-pointer"}>
                           <DropdownMenuItem onClick={() => setSelected("Most votes")}>
@@ -80,15 +89,15 @@ const Main = () => {
             </div>
 
             <div className='flex gap-1' >
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#265BD1] border  px-2 py-1 items-center flex gap-1'>
                     <i className="fa-solid fa-square text-[6px] text-[#265BD1]"></i>
                     Planned
                 </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#01A04E] border  px-2 py-1 items-center flex gap-1'>
                     <i className="fa-solid fa-square text-[6px] text-[#01A04E]"></i>
                     In Progress
                 </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#7531F9] border  px-2 py-1 items-center flex gap-1'>
                     <i className="fa-solid fa-square text-[6px] text-[#7531F9]"></i>
                     Released
                 </button>
@@ -101,7 +110,7 @@ const Main = () => {
         </div>
 
 
-        <div>
+        <div className='flex-1 overflow-y-auto pr-5 mx-auto'>
             
         {/* My requests  */}
             <div className="space-y-4">

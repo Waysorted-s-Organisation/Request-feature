@@ -66,7 +66,7 @@ const MyReportCard = ({ request }) => {
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="hover:bg-[#E8EFFC] hover:text-[#265BD1]"
+                className="hover:bg-[#E8EFFC] hover:text-[#265BD1] "
               >
                 <EllipsisIcon />
               </Button>
@@ -109,20 +109,20 @@ const MyReportCard = ({ request }) => {
                         <div className="flex items-center mr-5 p-2 rounded-md  w-[36px] h-[36px]">
                           <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] gap-2 focus:outline-none focus:ring-0">
+                          <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
                             <EllipsisIcon />
                           </button>
                         </DropdownMenuTrigger>
                   
-                        <DropdownMenuContent className={"mr-2 cursor-pointer"}>
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" onClick={() => setIsEditing(true)}>
+                        <DropdownMenuContent className={"mr-10 cursor-pointer "}>
+                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] text-xs rounded-md" onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <DropdownMenuItem
                                 onSelect={(e) => e.preventDefault()}
-                                className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md"
+                                className="px-3 py-1 hover:bg-[#E8EFFC] text-xs rounded-md"
                               >
                                 Delete
                               </DropdownMenuItem>

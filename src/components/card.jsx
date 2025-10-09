@@ -97,8 +97,8 @@ const Card = ({ title, description, details, status, votes }) => {
                   <div className="mr-2 cursor-pointer">
                      <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="border px-1 py-1 rounded-sm flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
-                            <EllipsisIcon />
+                          <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
+                            <EllipsisIcon size={20} />
                           </button>
                         </DropdownMenuTrigger>
                   

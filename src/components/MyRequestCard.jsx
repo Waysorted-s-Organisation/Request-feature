@@ -26,6 +26,7 @@ import { DropdownMenu, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
 import { Separator } from "./ui/separator"
+import { toast } from "sonner"
 
 const MyRequestCard = ({ request, showManageText = false  }) => {
 
@@ -50,8 +51,32 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
 
   const formattedCount = count.toString().padStart(2, "0")
 
+
+  // for copy notification 
+
+  const handleCopy = async () => {
+  const link = "https://example.com" // or your real dynamic link
+  await navigator.clipboard.writeText(link)
+
+  toast("Link Copied to Clipboard", {
+    duration: 2000,
+    style: {
+      width:"227px",
+      height: "43px",
+      background: "#E8EFFC",
+      color: "black",
+      fontWeight: "600",
+      fontSize: "14px",
+      borderRadius: "15px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center", 
+    },
+  })
+}
+
   return (
-    <div className="flex h-[109px] w-[791px] border-b border-gray-200 items-center">
+    <div className="flex h-[109px] w-[791px] border-b border-gray-200 items-center mt-2">
       {/* Upvote Box */}
       <div
         onClick={handleClick}
@@ -135,15 +160,15 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                         </div>
 
                         <div className="flex items-center mr-5 p-2 rounded-md  w-[36px] h-[36px]">
-                          <DropdownMenu>
+                        <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] hover:bg-[#F3F3F3] gap-2 focus:outline-none focus:ring-0">
+                          <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
                             <EllipsisIcon />
                           </button>
                         </DropdownMenuTrigger>
                   
-                        <DropdownMenuContent className={"mr-2 cursor-pointer"}>
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" onClick={() => setIsEditing(true)}>
+                        <DropdownMenuContent className={"mr-10 cursor-pointer w-[73px] h-[93px]"}>
+                          <DropdownMenuItem className="px-3 py-1.5 hover:bg-[#E8EFFC] text-xs rounded-md" onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
 
@@ -151,28 +176,28 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                             <AlertDialogTrigger asChild>
                               <DropdownMenuItem
                                 onSelect={(e) => e.preventDefault()}
-                                className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md"
+                                className="px-3 py-1.5 hover:bg-[#E8EFFC] rounded-md text-xs"
                               >
                                 Delete
                               </DropdownMenuItem>
                             </AlertDialogTrigger>
-                          
-                            <AlertDialogContent className={"m-0 p-0"}>
+
+                            <AlertDialogContent className={"m-0 p-0 w-[453px] h-[188px]"}>
                               <AlertDialogHeader>
-                                <AlertDialogTitle className={"text-sm text-gray-500 p-3"}>Delete Requested Feature</AlertDialogTitle>
-                                <Separator/>
-                                <AlertDialogDescription className={"text-black font-semibold p-3"}>
+                                <AlertDialogTitle className={"text-sm text-[#565A5E] px-2 pt-3 pb-3 border-b"}>Delete Requested Feature</AlertDialogTitle>
+                                {/* <Separator/> */}
+                                <AlertDialogDescription className={"text-black font-semibold px-2 pt-2"}>
                                   Are you sure you want to delete this request? This will delete your
                                   request and you have to resubmit the request
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
 
-                              <Separator/>
+                              {/* <Separator/>  */}
                           
-                              <AlertDialogFooter className={"p-3"}>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogFooter className={"px-4 py-2 flex justify-end gap-2 items-center border-t"}>
+                                <AlertDialogCancel className={"w-[108px] h-[36px] bg-[#F3F3F3] border-none cursor-pointer"}>Cancel</AlertDialogCancel>
                                 <AlertDialogAction
-                                  className="bg-red-500 hover:bg-red-600 text-white"
+                                  className="bg-[#E84C3D] hover:bg-red-600 text-white cursor-pointer w-[108px] h-[36px]"
                                   onClick={() => deleteMyRequest(request.id)}
                                 >
                                   Delete
@@ -181,7 +206,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                             </AlertDialogContent>
                           </AlertDialog>
 
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md">
+                          <DropdownMenuItem onClick={handleCopy} className="px-3 py-1.5 hover:bg-[#E8EFFC] rounded-md text-xs">
                             Copy link
                           </DropdownMenuItem>
 

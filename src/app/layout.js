@@ -3,6 +3,7 @@ import "./globals.css";
 import { RequestProvider } from "@/context/RequestContext";
 import { ChatProvider } from "@/context/ChatContext";
 import { MyRequestProvider } from "@/context/MyRequestContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           <ChatProvider>
             <MyRequestProvider>
               {children}
+              <Toaster position="top-right" richColors/>
             </MyRequestProvider>
           </ChatProvider>
         </RequestProvider>

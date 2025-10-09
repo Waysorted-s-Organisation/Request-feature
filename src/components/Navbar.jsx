@@ -82,16 +82,14 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-[453px] h-[450px] m-0 p-0">
         <DialogHeader>
-          <DialogTitle className="text-sm text-[#565A5E]">
+          <DialogTitle className="text-sm text-[#565A5E] px-6 py-4 border-b">
             Request a feature or report a bug
           </DialogTitle>
         </DialogHeader>
 
-        <Separator />
-
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 px-6">
           <p className="text-sm font-medium">Upload and attach files</p>
 
           {/* Upload Box */}
@@ -111,7 +109,7 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
           </label>
 
           {/* Fixed height for info or uploaded files */}
-          <div className="h-[140px] w-full flex flex-col justify-center">
+          <div className="h-[130px] w-full flex flex-col justify-center">
             {files.length === 0 ? (
               <div className="flex flex-col items-center text-xs text-gray-400">
                 <p>you can upload up to 2 photos to show what</p>
@@ -143,13 +141,6 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
                             </span>
                           </p>
                         )}
-                        {/* <div className=" relative w-full h-1 bg-gray-200 rounded-full overflow-hidden">
-                          <div
-                            className={`absolute h-1 bg-[#265BD1] transition-all duration-500 ${
-                              uploading ? "w-[70%]" : "w-[100%]"
-                            }`}
-                          />
-                        </div> */}
                         
                         <div className="relative w-full h-1 bg-gray-200 rounded-full overflow-hidden">
                         <div
@@ -239,16 +230,14 @@ const Navbar = () => {
               <PlusIcon size={12} /> Request a feature
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="m-0 p-0 w-[453px] h-[465px] ">
             <DialogHeader>
-              <DialogTitle className="text-sm text-[#565A5E]">
+              <DialogTitle className="text-sm text-[#565A5E] px-6 py-4 border-b">
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
 
-            <Separator />
-
-            <div className="space-y-4">
+            <div className="space-y-4 px-7">
               <div className="space-y-2">
                 <p className="text-sm font-medium">I would like to:</p>
                 <RadioGroup
@@ -331,30 +320,30 @@ const Navbar = () => {
 
         {/* Success dialog (feature only) */}
         <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
-          <DialogContent className="max-w-[453px] h-[300px] text-center">
+          <DialogContent className="w-[453px] h-[278px] m-0 p-0 text-center">
             <DialogHeader>
-              <DialogTitle className="text-sm text-[#565A5E]">
+              <DialogTitle className="text-sm text-[#565A5E] px-6 py-4 border-b">
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
-            <Separator />
             <div className="flex flex-col items-center ">
               <img
                 src="/success.svg"
                 alt="Success"
-                className="w-[59px] h-[59px]"
+                className="w-[59px] h-[59px] mb-3"
               />
               <p className="text-green-600 font-semibold text-lg">Success!</p>
               <p className="text-gray-500">
                 Your request has been added to <b>My Requests</b>.
               </p>
-            </div>
-            <div className="bg-[#E8EFFC] w-full p-1 rounded-md text-sm text-gray-600 items-center mt-4">
-                    You can{" "}
+
+              <div className="bg-[#E8EFFC] w-fit px-8 py-1 flex rounded-md text-sm text-gray-600 items-center justify-center mt-6">
+                    You can &nbsp;{" "}
                     <a onClick={() => router.push("/yourRequest")} className="cursor-pointer text-[#265BD1]">
-                      click here
+                      click here&nbsp;
                     </a>{" "}
                     to track the status of your request
+            </div>
             </div>
           </DialogContent>
         </Dialog>

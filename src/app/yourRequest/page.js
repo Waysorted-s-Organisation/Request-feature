@@ -7,10 +7,13 @@ import { Button } from '@/components/ui/button';
 import { useMyRequest } from '@/context/MyRequestContext';
 import { useRequests } from '@/context/RequestContext';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { ChevronDown } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const page = () => {
+
+  const router = useRouter();
 
     const { requests } = useRequests();
         const { myRequests } = useMyRequest()
@@ -39,71 +42,47 @@ const page = () => {
          </div>
 
          <div className="flex flex-1 pt-[68px]">
-        
-        <div className="fixed left-0 top-[68px] h-[calc(100vh-68px)] w-[225px] border-r bg-white">
-          <Sidebar hideFeatures />
-        </div>
 
         
-        <div className="ml-[225px] flex-1 overflow-y-auto h-[calc(100vh-68px)] px-4">
+        <div className=" flex-1 overflow-y-auto h-[calc(100vh-68px)] px-4">
           <div>
 
-            <div className='h-[calc(100vh-68px)] flex-1 flex flex-col z-50 m-5 bg-white'>
+            <div className='h-[calc(100vh-68px)] flex-1 flex flex-col z-50  bg-white'>
 
-                 <div className='flex justify-between items-center mr-5 mb-6'>
+                 <div className='flex justify-between items-center mr-10 mb-6 fixed bg-white w-[calc(100%-40px)] z-50 pt-5'>
 
-            <div className='flex text-sm items-center mt-4 gap-2'>
+                    <div className='flex text-sm items-center mt-4 gap-2'>
+        
+                        <div onClick={()=> router.push("/")} className='flex items-center border cursor-pointer border-gray-300 px-3 py-2 rounded-md text-sm text-[#565A5E] hover:bg-[#E8EFFC] hover:text-[#265BD1]'>
+                          <ChevronLeft size={16}/>
+                          <p>Go back</p>
+                        </div>
+        
+                    </div>
 
-                <p>Show</p>
-                 <DropdownMenu open={open} onOpenChange={setOpen}>
-                        <DropdownMenuTrigger asChild>
-                          <button className="border px-2 py-1 rounded-sm flex items-center hover:text-[#265BD1] gap-2 focus:outline-none focus:ring-0">
-                            {selected}
-                            <ChevronDown
-                              size={16}
-                              className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-                            />
-                          </button>
-                        </DropdownMenuTrigger>
-                  
-                        <DropdownMenuContent>
-                          <DropdownMenuItem onClick={() => setSelected("Most votes")}>
-                            Most votes
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelected("Recently added")}>
-                            Recently added
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelected("Random")}>
-                            Random
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                </DropdownMenu>
-
-            </div>
-
-            <div className='flex gap-1' >
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#265BD1]"></i>
-                    Planned
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#01A04E]"></i>
-                    In Progress
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#7531F9]"></i>
-                    Released
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#565A5E]"></i>
-                    Not done
-                </button>
-            </div>
+                    <div className='flex gap-1 mr-5' >
+                        <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                            <i className="fa-solid fa-square text-[6px] text-[#265BD1]"></i>
+                            Planned
+                        </button>
+                        <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                            <i className="fa-solid fa-square text-[6px] text-[#01A04E]"></i>
+                            In Progress
+                        </button>
+                        <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                            <i className="fa-solid fa-square text-[6px] text-[#7531F9]"></i>
+                            Released
+                        </button>
+                        <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
+                            <i className="fa-solid fa-square text-[6px] text-[#565A5E]"></i>
+                            Not done
+                        </button>
+                    </div>
 
                  </div>
 
 
-                 <div className="ml-50">
+                 <div className="mx-auto relative mt-20">
 
                   <div className='flex gap-6'>
                     <p
