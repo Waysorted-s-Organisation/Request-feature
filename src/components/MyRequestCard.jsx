@@ -76,24 +76,23 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
 }
 
   return (
-    <div className="flex h-[109px] w-full border-b border-gray-200 items-center mt-2">
+    <div className="flex h-[109px] w-full border-b border-[#F3F3F3] items-center mt-2 px-5">
       {/* Upvote Box */}
       <div
-        onClick={handleClick}
-        className={`w-14 h-14 cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
+        className={`w-14 h-14 border border-[#565A5B] rounded-md flex flex-col items-center justify-center group transition-colors duration-200
           ${
             isUpvoted
               ? "border-[#265BD1] bg-[#E8EFFC]"
               : "bg-white border-[#565A5E]"
           }`}
       >
-        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
+        <i className="fa-solid fa-caret-up text-xl text-black transform transition-transform duration-200"></i>
         <p className="text-black">{formattedCount}</p>
       </div>
 
       {/* Request Info */}
-      <div className="px-4 flex justify-between w-full">
-        <div>
+      <div className="px-4 flex justify-between w-full ">
+        <div className="">
           <h1 className="font-semibold text-sm">{request.title}</h1>
           <p className="text-xs text-[#565A5E]">{request.description}</p>
 
@@ -115,7 +114,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="hover:bg-[#E8EFFC] hover:text-[#265BD1] cursor-pointer"
+                className="hover:bg-[#E8EFFC] hover:text-[#265BD1] hover:border-white shadow-none cursor-pointer"
               >
                 {showManageText ? "Manage Request" : <EllipsisIcon />}
               </Button>

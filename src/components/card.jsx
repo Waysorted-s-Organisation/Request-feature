@@ -29,7 +29,7 @@ const Card = ({ title, description, details, status, votes }) => {
   const formattedCount = String(count).padStart(2, "0");
 
   return (
-    <div className="flex h-[109px] w-[791px] border-b border-gray-200 items-center">
+    <div className="flex h-[109px] border-b border-[#F3F3F3] rounded-sm w-full items-center hover:bg-[#F3F3F3] px-5">
       {/* Upvote box */}
       <div
         onClick={() => {
@@ -39,7 +39,7 @@ const Card = ({ title, description, details, status, votes }) => {
         className={`w-14 h-14 cursor-pointer border rounded-md flex flex-col items-center justify-center group
         ${isUpvoted ? "border-[#265BD1] bg-[#E8EFFC]" : "border-[#565A5E] bg-white"}`}
       >
-        <i className="fa-solid fa-caret-up text-xl text-[#265BD1] group-hover:-translate-y-1"></i>
+        <i className="fa-solid fa-caret-up text-xl text-black group-hover:text-[#265BD1] group-hover:-translate-y-1"></i>
         <p className="text-black">{formattedCount}</p>
       </div>
 

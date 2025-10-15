@@ -50,7 +50,7 @@ const Main = () => {
 
       {/* should be fixed at given position and non-scrollable  */}
 
-        <div id='fixed-header' className='flex justify-between items-center mr-5 mb-6 sticky top-0 bg-white z-50'>
+        <div id='fixed-header' className='flex justify-between items-center mr-5 mb-6 relative top-0 bg-white'>
 
             <div className='flex text-sm items-center mt-4 gap-2'>
 
@@ -110,7 +110,7 @@ const Main = () => {
         </div>
 
 
-        <div className='flex-1 overflow-y-auto pr-5 mx-auto'>
+        <div className='flex-1 overflow-y-auto w-[850px] pr-5 mx-auto'>
             
         {/* My requests  */}
             <div className="space-y-4">

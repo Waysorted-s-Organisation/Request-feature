@@ -16,7 +16,7 @@ const Sidebar = ({ hideFeatures = false }) => {
       <div>
         <div
           onClick={() => router.push("/")}
-          className="text-sm text-[#565A5E] p-2 flex items-center my-3 cursor-pointer rounded-md hover:bg-[#E8EFFC] hover:text-[#265BD1]"
+          className="text-sm text-[#565A5E] py-2 px-6 w-full flex border items-center justify-center mb-8 cursor-pointer rounded-sm hover:bg-[#E8EFFC] hover:border-white hover:text-[#265BD1]"
         >
           <ChevronLeft size={16} />
           <p>{isHome ? "Back home" : "Go back"}</p>
