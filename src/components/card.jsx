@@ -36,7 +36,7 @@ const Card = ({ title, description, details, status, votes }) => {
           setCount(isUpvoted ? count - 1 : count + 1);
           setIsUpvoted(!isUpvoted);
         }}
-        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group
+        className={`w-14 h-14 cursor-pointer border rounded-md flex flex-col items-center justify-center group
         ${isUpvoted ? "border-[#265BD1] bg-[#E8EFFC]" : "border-[#565A5E] bg-white"}`}
       >
         <i className="fa-solid fa-caret-up text-xl text-[#265BD1] group-hover:-translate-y-1"></i>

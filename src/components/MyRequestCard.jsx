@@ -76,11 +76,11 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
 }
 
   return (
-    <div className="flex h-[109px] w-[791px] border-b border-gray-200 items-center mt-2">
+    <div className="flex h-[109px] w-full border-b border-gray-200 items-center mt-2">
       {/* Upvote Box */}
       <div
         onClick={handleClick}
-        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
+        className={`w-14 h-14 cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
           ${
             isUpvoted
               ? "border-[#265BD1] bg-[#E8EFFC]"
@@ -159,11 +159,11 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                           </div>
                         </div>
 
-                        <div className="flex items-center mr-5 p-2 rounded-md  w-[36px] h-[36px]">
+                        <div className="flex items-center mr-5 p-2 rounded-sm  w-[36px] h-[36px]">
                         <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
-                            <EllipsisIcon />
+                            <EllipsisIcon size={15} />
                           </button>
                         </DropdownMenuTrigger>
                   
@@ -197,7 +197,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                               <AlertDialogFooter className={"px-4 py-2 flex justify-end gap-2 items-center border-t"}>
                                 <AlertDialogCancel className={"w-[108px] h-[36px] bg-[#F3F3F3] border-none cursor-pointer"}>Cancel</AlertDialogCancel>
                                 <AlertDialogAction
-                                  className="bg-[#E84C3D] hover:bg-red-600 text-white cursor-pointer w-[108px] h-[36px]"
+                                  className="bg-[#E84C3D] hover:bg-[#d04537] text-white cursor-pointer w-[108px] h-[36px]"
                                   onClick={() => deleteMyRequest(request.id)}
                                 >
                                   Delete
