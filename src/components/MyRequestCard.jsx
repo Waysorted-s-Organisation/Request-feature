@@ -60,6 +60,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
 
   toast("Link Copied to Clipboard", {
     duration: 2000,
+    position: "bottom-center",
     style: {
       width:"227px",
       height: "43px",
@@ -76,17 +77,17 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
 }
 
   return (
-    <div className="flex h-[109px] w-full border-b border-[#F3F3F3] items-center mt-2 px-5">
+    <div className="flex h-[109px] w-full min-w-[791px] border-b border-[#F3F3F3] items-center mt-2 px-5">
       {/* Upvote Box */}
       <div
-        className={`w-14 h-14 border border-[#565A5B] rounded-md flex flex-col items-center justify-center group transition-colors duration-200
+        className={`w-14 h-14 flex-shrink-0 rounded-md flex flex-col items-center justify-center group transition-colors duration-200
           ${
             isUpvoted
               ? "border-[#265BD1] bg-[#E8EFFC]"
-              : "bg-white border-[#565A5E]"
+              : "bg-[#F3F3F3]"
           }`}
       >
-        <i className="fa-solid fa-caret-up text-xl text-black transform transition-transform duration-200"></i>
+        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200"></i>
         <p className="text-black">{formattedCount}</p>
       </div>
 
@@ -129,8 +130,8 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                   <div className="flex flex-col gap-4 my-1">
                     {/* Top Card Inside Sheet */}
                     <div className="flex h-[109px] w-full items-center">
-                      <div className="w-[54px] h-[54px] bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
-                        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
+                      <div className="w-[54px] h-[54px] flex-shrink-0 bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
+                        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200"></i>
                         <p className="text-black">{formattedCount}</p>
                       </div>
 
@@ -166,7 +167,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                           </button>
                         </DropdownMenuTrigger>
                   
-                        <DropdownMenuContent className={"mr-10 cursor-pointer w-[73px] h-[93px]"}>
+                        <DropdownMenuContent className={"mr-10 cursor-pointer w-[73px] h-[93px] overflow-hidden "}>
                           <DropdownMenuItem className="px-3 py-1.5 hover:bg-[#E8EFFC] text-xs rounded-md" onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
@@ -185,7 +186,7 @@ const MyRequestCard = ({ request, showManageText = false  }) => {
                               <AlertDialogHeader>
                                 <AlertDialogTitle className={"text-sm text-[#565A5E] px-2 pt-3 pb-3 border-b"}>Delete Requested Feature</AlertDialogTitle>
                                 {/* <Separator/> */}
-                                <AlertDialogDescription className={"text-black font-semibold px-2 pt-2"}>
+                                <AlertDialogDescription className={"text-black px-2 pt-2"}>
                                   Are you sure you want to delete this request? This will delete your
                                   request and you have to resubmit the request
                                 </AlertDialogDescription>

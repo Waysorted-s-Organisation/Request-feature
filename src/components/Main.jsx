@@ -1,149 +1,109 @@
 "use client"
-import { Button } from '@/components/ui/button'
+import { useState } from 'react'
 import Card from '@/components/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { useRequests } from '@/context/RequestContext'
-import { DropdownMenuArrow } from '@radix-ui/react-dropdown-menu'
-import { ArrowBigDownIcon, ChevronDown, Edit2Icon, SquarePen } from 'lucide-react'
-import React, { useState } from 'react'
-import { useMyRequest } from '@/context/MyRequestContext'
 import MyRequestCard from './MyRequestCard'
+import { useRequests } from '@/context/RequestContext'
+import { useMyRequest } from '@/context/MyRequestContext'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { ChevronDown } from 'lucide-react'
 
 const Main = () => {
+  const { requests } = useRequests()
+  const { myRequests } = useMyRequest()
 
-    const { requests } = useRequests();
-    const { myRequests } = useMyRequest()
+  const [selected, setSelected] = useState("Most votes")
+  const [open, setOpen] = useState(false)
 
-    const [selected, setSelected] = useState("Most votes")
-    const [open, setOpen] = useState(false)
-    const [count, setCount] = useState(1);
-    const [isUpvoted, setIsUpvoted] = useState(false);
-    
-      const handleClick = () => {
-        if (isUpvoted) {
-          setCount(count - 1);
-        } else {
-          setCount(count + 1);
-        }
-        setIsUpvoted(!isUpvoted);
-      };
-    
-    const formattedCount = String(count).padStart(2, "0");
+  const [active, setActive] = useState("Planned")
+
+  const statusButtons = [
+    { label: "Planned", color: "#265BD1" },
+    { label: "In Progress", color: "#01A04E" },
+    { label: "Released", color: "#7531F9" },
+    { label: "Not done", color: "#565A5E" },
+  ]
 
   return (
-    <div className='h-[calc(100vh-68px)] flex-1 flex flex-col z-50 m-5'>
-
-      {/* should be fixed at given position and non-scrollable  */}
-
-        <div id='fixed-header' className='flex justify-between items-center mr-5 mb-6 relative top-0 bg-white'>
-
-            <div className='flex text-sm items-center mt-4 gap-2'>
-
-                <p>Show</p>
-                 <DropdownMenu open={open} onOpenChange={setOpen} className={"cursor-pointer"}>
-                        <DropdownMenuTrigger asChild>
-                          <button
-                            className={`border px-2 py-1 rounded-sm flex items-center gap-2 focus:outline-none focus:ring-0 transition-colors duration-200 ${
-                              open ? "bg-gray-100" : "bg-transparent"
-                            } hover:text-[#265BD1]`}
-                          >
-                            {selected}
-                            <ChevronDown
-                              size={16}
-                              className={`transition-transform duration-300 ${
-                                open ? "rotate-180" : ""
-                              }`}
-                            />
-                          </button>
-                        </DropdownMenuTrigger>
-
-                  
-                        <DropdownMenuContent className={"cursor-pointer"}>
-                          <DropdownMenuItem onClick={() => setSelected("Most votes")}>
-                            Most votes
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelected("Recently added")}>
-                            Recently added
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelected("Random")}>
-                            Random
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                </DropdownMenu>
-
-            </div>
-
-            <div className='flex gap-1' >
-                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#265BD1] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#265BD1]"></i>
-                    Planned
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#01A04E] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#01A04E]"></i>
-                    In Progress
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:text-[#7531F9] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#7531F9]"></i>
-                    Released
-                </button>
-                <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
-                    <i className="fa-solid fa-square text-[6px] text-[#565A5E]"></i>
-                    Not done
-                </button>
-            </div>
-
+    <div className="relative w-full">
+      
+      {/* Fixed Header */}
+      <div
+        id="fixed-header"
+        className="fixed top-[58px] left-[225px] right-0 z-40 flex justify-between items-center bg-white px-5 py-8"
+      >
+        {/* Left: Filter Dropdown */}
+        <div className="flex items-center gap-2 text-sm">
+          <p>Show</p>
+          <DropdownMenu open={open} onOpenChange={setOpen}>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={`border px-2 py-1 rounded-sm flex items-center gap-2 focus:outline-none focus:ring-0 transition-colors duration-200 ${
+                  open ? "bg-gray-100" : "bg-transparent"
+                } hover:text-[#265BD1]`}
+              >
+                {selected}
+                <ChevronDown size={16} className={`${open ? "rotate-180" : ""} transition-transform duration-300`} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="cursor-pointer">
+              <DropdownMenuItem onClick={() => setSelected("Most votes")}>Most votes</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelected("Recently added")}>Recently added</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSelected("Random")}>Random</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
-
-        <div className='flex-1 overflow-y-auto w-[850px] pr-5 mx-auto'>
-            
-        {/* My requests  */}
-            <div className="space-y-4">
-              {myRequests.length === 0 ? (
-                <p className="text-sm text-gray-500">
-                  You have not submitted any requests yet.
-                </p>
-              ) : (
-                // myRequests.map((req) => (
-                //   <MyRequestCard key={req.id} request={req} />
-                // ))
-                <MyRequestCard key={myRequests.at(-1).id} request={myRequests.at(-1)}  showManageText={true}/>
-
-              )}
-            </div>
-
-            {/* Other users Requests  */}
-
-            <div>
-            {requests.map((req) => (
-              <Card 
-                key={req.id}
-                title={req.title}
-                description={req.description}
-                details={req.details}
-                status={req.status}
-                votes={req.votes}
-              />
-            ))}
-            </div>
-            
-
+        {/* Right: Status buttons */}
+        <div className="flex gap-1">
+          {statusButtons.map(({ label, color }) => (
+            <button
+              key={label}
+              onClick={() => setActive(label)}
+              className={`text-sm text-[#565A5E] rounded-md border px-2 py-1 flex items-center gap-1 transition-colors duration-200 ${
+                active === label ? "bg-[#F3F3F3]" : "bg-transparent"
+              } hover:text-[${color}]`}
+            >
+              <i className="fa-solid fa-square text-[6px]" style={{ color }}></i>
+              {label}
+            </button>
+          ))}
         </div>
+      </div>
+
+      {/* Scrollable content */}
+      <div className="pt-[90px] space-y-4 w-[850px] mx-auto">
+        {/* My Requests */}
+        {myRequests.length === 0 ? (
+          <p className="text-sm text-gray-500">You have not submitted any requests yet.</p>
+        ) : (
+          <MyRequestCard key={myRequests.at(-1).id} request={myRequests.at(-1)} showManageText={true} />
+        )}
+
+        {/* Other Users Requests */}
+        {requests.map((req) => (
+          <Card
+            key={req.id}
+            title={req.title}
+            description={req.description}
+            details={req.details}
+            status={req.status}
+            votes={req.votes}
+          />
+        ))}
+
+        {requests.map((req) => (
+          <Card
+            key={req.id}
+            title={req.title}
+            description={req.description}
+            details={req.details}
+            status={req.status}
+            votes={req.votes}
+          />
+        ))}
+        
+      </div>
+
     </div>
   )
 }

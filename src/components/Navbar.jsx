@@ -89,11 +89,11 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col gap-4 px-6">
+        <div className="flex flex-col gap-4 px-6 pb-4">
           <p className="text-sm font-medium">Upload and attach files</p>
 
           {/* Upload Box */}
-          <label className="flex flex-col w-[399px] h-[124px] bg-[#F3F3F3] items-center justify-center border-2 border-dashed border-[#CFD0D1] rounded-md p-6 text-sm cursor-pointer hover:border-blue-400 transition">
+          <label className="flex flex-col w-[399px] h-[124px] bg-[#F3F3F3] items-center justify-center border-2 border-dashed border-[#CFD0D1] rounded-md p-6 text-sm cursor-pointer hover:border-blue-400 hover:bg-[#E8EFFC] transition">
             <input
               type="file"
               multiple
@@ -109,7 +109,7 @@ const BugUploadDialog = ({ open, onOpenChange }) => {
           </label>
 
           {/* Fixed height for info or uploaded files */}
-          <div className="h-[130px] w-full flex flex-col justify-center">
+          <div className="h-[130px] w-full flex flex-col justify-start">
             {files.length === 0 ? (
               <div className="flex flex-col items-center text-xs text-gray-400">
                 <p>you can upload up to 2 photos to show what</p>
@@ -211,9 +211,9 @@ const Navbar = () => {
       <div><img src="/Waysorted.svg" alt="logo" /></div>
 
       <div className="flex items-center gap-1">
-        <button className="border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer">
-          <Sun size={16} />
-        </button>
+        {/* <button className="border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer">
+          <Sun size={16} /> 
+        </button> */}
 
         <div className="flex items-center hover:bg-[#F3F3F3] border rounded-md w-[241px] h-[36px] px-2">
           <SearchIcon size={16} />
@@ -283,7 +283,9 @@ const Navbar = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="desc">Description</Label>
+                <Label htmlFor="desc">
+                  {type === "bug" ? "Describe the issue in detail" : "Description"}
+                </Label>
                 <Textarea
                   id="desc"
                   className="bg-[#F3F3F3]"

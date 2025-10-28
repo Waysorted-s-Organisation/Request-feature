@@ -14,6 +14,43 @@ export const ChatProvider = ({ children }) => {
     },
   ])
 
+  // inside ChatContext.js
+const updateComment = (id, newText) => {
+  setComments((prev) =>
+    prev.map((c) => (c.id === id ? { ...c, text: newText } : c))
+  )
+}
+
+const deleteComment = (id) => {
+  setComments((prev) => prev.filter((c) => c.id !== id))
+}
+
+const updateReply = (commentId, replyId, newText) => {
+  setComments((prev) =>
+    prev.map((c) =>
+      c.id === commentId
+        ? {
+            ...c,
+            replies: c.replies.map((r) =>
+              r.id === replyId ? { ...r, text: newText } : r
+            ),
+          }
+        : c
+    )
+  )
+}
+
+const deleteReply = (commentId, replyId) => {
+  setComments((prev) =>
+    prev.map((c) =>
+      c.id === commentId
+        ? { ...c, replies: c.replies.filter((r) => r.id !== replyId) }
+        : c
+    )
+  )
+}
+
+
   const addComment = (author, text) => {
     const newComment = {
       id: Date.now(),
@@ -47,7 +84,7 @@ export const ChatProvider = ({ children }) => {
   }
 
   return (
-    <ChatContext.Provider value={{ comments, addComment, addReply }}>
+    <ChatContext.Provider value={{ comments, addComment, addReply, updateComment, deleteComment, updateReply, deleteReply }}>
       {children}
     </ChatContext.Provider>
   )

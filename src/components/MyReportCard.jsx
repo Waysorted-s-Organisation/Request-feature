@@ -80,12 +80,12 @@ const MyReportCard = ({ request }) => {
                   <div className="flex flex-col gap-4 my-1">
                     {/* Top Card Inside Sheet */}
                     <div className="flex h-[109px] w-full items-center">
-                      <div className="w-[54px] h-[54px] bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
+                      {/* <div className="w-[54px] h-[54px] bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
                         <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
                         <p className="text-black">{formattedCount}</p>
-                      </div>
+                      </div> */}
 
-                      <div className="px-4 flex justify-between w-full">
+                      <div className=" flex justify-between w-full">
                         <div>
                           <h1 className="font-semibold text-sm">
                             {request.title}
@@ -109,9 +109,9 @@ const MyReportCard = ({ request }) => {
                         <div className="flex items-center mr-5 p-2 rounded-md  w-[36px] h-[36px]">
                           <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
+                          {/* <button className="bg-[#F3F3F3] px-2 py-2 rounded-lg cursor-pointer flex items-center hover:text-[#265BD1] hover:bg-[#E8EFFC] gap-2 focus:outline-none focus:ring-0">
                             <EllipsisIcon />
-                          </button>
+                          </button> */}
                         </DropdownMenuTrigger>
                   
                         <DropdownMenuContent className={"mr-10 cursor-pointer "}>
@@ -193,13 +193,13 @@ const MyReportCard = ({ request }) => {
                     </div>
 
                     {/* Comments Section Placeholder */}
-                    <div className="flex flex-1 mt-40 items-center justify-center flex-col">
+                    {/* <div className="flex flex-1 mt-40 items-center justify-center flex-col">
                       <h1 className="text-md text-black">No comments Yet!</h1>
                       <p className="text-black text-xs">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                         Nobis, alias?
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </SheetDescription>
               </SheetHeader>

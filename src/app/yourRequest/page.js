@@ -49,18 +49,18 @@ const page = () => {
 
             <div className='h-[calc(100vh-68px)] flex-1 flex flex-col z-50  bg-white'>
 
-                 <div className='flex justify-between items-center mr-10 mb-6 fixed bg-white w-[calc(100%-40px)] z-50 pt-5'>
+                 <div className='flex justify-between items-center mr-10 mb-6 fixed bg-white w-[calc(100%-40px)] z-50 pt-1'>
 
                     <div className='flex text-sm items-center mt-4 gap-2'>
         
-                        <div onClick={()=> router.push("/")} className='flex items-center border cursor-pointer border-gray-300 px-3 py-2 rounded-md text-sm text-[#565A5E] hover:bg-[#E8EFFC] hover:text-[#265BD1]'>
-                          <ChevronLeft size={16}/>
+                        <div onClick={()=> router.push("/")} className='flex items-center border cursor-pointer border-gray-300 px-5 py-2 rounded-md text-sm text-[#565A5E] hover:bg-[#E8EFFC] hover:border-white hover:text-[#265BD1]'>
+                          <ChevronLeft size={16}/> 
                           <p>Go back</p>
                         </div>
         
                     </div>
 
-                    <div className='flex gap-1 mr-5' >
+                    <div className='flex gap-1' >
                         <button className='text-sm text-[#565A5E] rounded-md hover:bg-[#F3F3F3] border  px-2 py-1 items-center flex gap-1'>
                             <i className="fa-solid fa-square text-[6px] text-[#265BD1]"></i>
                             Planned
@@ -87,12 +87,12 @@ const page = () => {
                   <div className='flex gap-6'>
                     <p
                     onClick={() => setActive("requests")} 
-                    className={`text-md w-fit mb-4 cursor-pointer ${active === "requests" ? "border-b-2 border-[#265BD1] text-[#265BD1]" : ""}`}>My Requests
+                    className={`text-sm w-fit mb-4 cursor-pointer ${active === "requests" ? "border-b-2 border-[#265BD1] text-[#265BD1]" : ""}`}>My Requests
                     </p>
 
                     <p
                     onClick={() => setActive("reports")} 
-                    className={`text-md w-fit mb-4 cursor-pointer ${active === "reports" ? "border-b-2 border-[#265BD1] text-[#265BD1]" : ""}`}>My Reports
+                    className={`text-sm w-fit mb-4 cursor-pointer ${active === "reports" ? "border-b-2 border-[#265BD1] text-[#265BD1]" : ""}`}>My Reports
                     </p>
 
                   </div>

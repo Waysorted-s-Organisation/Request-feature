@@ -12,6 +12,7 @@ import { EllipsisIcon } from "lucide-react";
 import Dropdown from "daisyui/components/dropdown";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { DropdownMenuItem } from "./ui/dropdown-menu";
+import { toast } from "sonner"
 
 const Card = ({ title, description, details, status, votes }) => {
   const [count, setCount] = useState(votes || 1);
@@ -27,6 +28,30 @@ const Card = ({ title, description, details, status, votes }) => {
   };
 
   const formattedCount = String(count).padStart(2, "0");
+
+   // for copy notification 
+
+  const handleCopy = async () => {
+  const link = "https://example.com" // or your real dynamic link
+  await navigator.clipboard.writeText(link)
+
+  toast("Link Copied to Clipboard", {
+    duration: 2000,
+    position: "bottom-center",
+    style: {
+      width:"227px",
+      height: "43px",
+      background: "#E8EFFC",
+      color: "black",
+      fontWeight: "600",
+      fontSize: "14px",
+      borderRadius: "15px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center", 
+    },
+  })
+}
 
   return (
     <div className="flex h-[109px] border-b border-[#F3F3F3] rounded-sm w-full items-center hover:bg-[#F3F3F3] px-5">
@@ -71,9 +96,10 @@ const Card = ({ title, description, details, status, votes }) => {
               <div className="flex flex-col gap-4 my-1">
                 <div className="flex h-[109px] w-full items-center">
 
-                  <div className="w-[54px] h-[54px] bg-[#F3F3F3] border border-[#565A5E] rounded-md flex flex-col items-center justify-center group">
+                  <div onClick={handleClick} className={`w-14 h-14 min-w-[56px] min-h-[56px] cursor-pointer border rounded-md flex flex-col items-center justify-center group 
+                          ${isUpvoted ? "border-[#265BD1] bg-[#E8EFFC]" : "border-[#565A5E] bg-white"}`}>
                     <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
-                    <p className="text-black">01</p>
+                    <p className="text-black">{formattedCount}</p>
                   </div>
 
                   <div className="px-4 flex justify-between w-full">
@@ -103,7 +129,7 @@ const Card = ({ title, description, details, status, votes }) => {
                         </DropdownMenuTrigger>
                   
                         <DropdownMenuContent className={" cursor-pointer border border-gray-200 shadow-md rounded-md mt-2 mr-5"}>
-                          <DropdownMenuItem className="px-3 pr-3 py-1 hover:bg-[#E8EFFC] rounded-md ">
+                          <DropdownMenuItem onClick={handleCopy} className="px-3 py-1.5 hover:bg-[#E8EFFC] rounded-md text-xs">
                             Copy Link
                           </DropdownMenuItem>
                         </DropdownMenuContent>
