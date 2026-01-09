@@ -22,8 +22,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import {  EllipsisIcon } from "lucide-react"
-import { DropdownMenu, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
-import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
 import { Separator } from "./ui/separator"
 
@@ -66,18 +65,18 @@ const MyRequestCard = ({ request, showManageText = false }: MyRequestCardProps) 
   const formattedCount = count.toString().padStart(2, "0")
 
   return (
-    <div className="flex h-[109px] w-full max-w-[791px] border-b border-gray-200 items-center">
+    <div className="flex hover:bg-[#e4e4e4] duration-200 ease-in-out rounded-sm pl-6 h-[109px] w-full border-b border-gray-200 items-center">
       {/* Upvote Box */}
       <div
         onClick={handleClick}
-        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
+        className={`w-[54px] h-[54px] pl cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors duration-200
           ${
             isUpvoted
               ? "border-[#265BD1] bg-[#E8EFFC]"
-              : "bg-white border-[#565A5E]"
+              : "bg-white border-[#565A5E] hover:border-[#265BD1]"
           }`}
       >
-        <i className="fa-solid fa-caret-up text-xl text-[#565A5E] transform transition-transform duration-200 group-hover:-translate-y-1"></i>
+        <i className={`fa-solid fa-caret-up text-xl transform transition-all duration-200 group-hover:-translate-y-1 ${isUpvoted ? "text-[#265BD1]" : "text-[#565A5E] group-hover:text-[#265BD1]"}`}></i>
         <p className="text-black">{formattedCount}</p>
       </div>
 
@@ -105,7 +104,7 @@ const MyRequestCard = ({ request, showManageText = false }: MyRequestCardProps) 
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="hover:bg-[#E8EFFC] hover:text-[#265BD1] cursor-pointer"
+                className="bg-white border-gray-200 text-black hover:bg-[#E8EFFC] hover:text-[#265BD1] hover:border-[#E8EFFC] active:bg-[#D4E1F8] active:text-[#265BD1] transition-colors cursor-pointer"
               >
                 {showManageText ? "Manage Request" : <EllipsisIcon />}
               </Button>
@@ -158,15 +157,16 @@ const MyRequestCard = ({ request, showManageText = false }: MyRequestCardProps) 
                         </DropdownMenuTrigger>
                   
                         <DropdownMenuContent className={"mr-2 cursor-pointer"}>
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" onClick={() => setIsEditing(true)}>
+                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" inset={false} onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
 
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <DropdownMenuItem
-                                onSelect={(e) => e.preventDefault()}
+                                onSelect={(e: Event) => e.preventDefault()}
                                 className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md"
+                                inset={false}
                               >
                                 Delete
                               </DropdownMenuItem>
@@ -196,7 +196,7 @@ const MyRequestCard = ({ request, showManageText = false }: MyRequestCardProps) 
                             </AlertDialogContent>
                           </AlertDialog>
 
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md">
+                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" inset={false}>
                             Copy link
                           </DropdownMenuItem>
 

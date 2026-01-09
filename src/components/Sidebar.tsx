@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 const Sidebar = ({ hideFeatures = false }) => {
   const router = useRouter();
-  const pathname = usePathname(); // ✅ Get current route
+  const pathname = usePathname(); 
 
   const isHome = pathname === "/"; // Check if user is on home page
 
@@ -16,24 +16,23 @@ const Sidebar = ({ hideFeatures = false }) => {
       <div>
         <div
           onClick={() => router.push("/")}
-          className="text-sm text-[#565A5E] p-2 flex items-center my-3 cursor-pointer rounded-md hover:bg-[#E8EFFC] hover:text-[#265BD1]"
+          className="text-sm text-[#565A5E] p-2 border border-gray-200 bg-white flex justify-center items-center my-3 cursor-pointer rounded-md hover:bg-[#E8EFFC] hover:text-[#265BD1] hover:border-[#E8EFFC] active:bg-[#D4E1F8] active:text-[#265BD1] transition-colors"
         >
           <ChevronLeft size={16} />
           <p>{isHome ? "Back home" : "Go back"}</p>
         </div>
 
-        {/* ✅ Conditionally render Features Board */}
         {!hideFeatures && (
-          <div>
+          <div className="pl-27px">
             <h1 className="font-bold text-sm my-2">Features Board</h1>
             <div>
-              <p className="text-xs text-[#565A5E] hover:bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm">
+              <p className="text-xs text-[#565A5E] bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm cursor-pointer">
                 Figma Plugin: Palletable
               </p>
-              <p className="text-xs text-[#565A5E] hover:bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm">
-                Waystudio
+              <p className="text-xs text-[#565A5E] hover:bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm cursor-pointer transition-colors">
+                Palatable: Color contrast
               </p>
-              <p className="text-xs text-[#565A5E] hover:bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm">
+              <p className="text-xs text-[#565A5E] hover:bg-[#F3F3F3] w-full h-full py-2 px-2 rounded-sm cursor-pointer transition-colors">
                 Waychallenge
               </p>
             </div>

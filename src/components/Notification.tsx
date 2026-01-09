@@ -1,15 +1,14 @@
 import React from 'react'
-import { DropdownMenu } from './ui/dropdown-menu'
-import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { Bell } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './ui/dropdown-menu'
 
 const Notification = () => {
   return (
     <div>
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className='border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer'><Bell size={16}/> </button>
+              <button className='border bg-white p-1 rounded-md w-[36px] h-[36px] flex items-center justify-center cursor-pointer'>
+                <img src="/notificationIcon.png" alt="Notifications" className="w-4 h-4" />
+              </button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className='p-2 items-center flex justify-center'>

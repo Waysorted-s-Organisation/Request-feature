@@ -22,8 +22,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import {  EllipsisIcon } from "lucide-react"
-import { DropdownMenu, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
-import { DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useMyRequest } from "@/context/MyRequestContext"
 import { MyRequest } from "@/types"
 
@@ -121,14 +120,15 @@ const MyReportCard = ({ request }: MyReportCardProps) => {
                         </DropdownMenuTrigger>
                   
                         <DropdownMenuContent className={"mr-2 cursor-pointer"}>
-                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" onClick={() => setIsEditing(true)}>
+                          <DropdownMenuItem className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md" inset={false} onClick={() => setIsEditing(true)}>
                             Edit request
                           </DropdownMenuItem>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <DropdownMenuItem
-                                onSelect={(e) => e.preventDefault()}
+                                onSelect={(e: Event) => e.preventDefault()}
                                 className="px-3 py-1 hover:bg-[#E8EFFC] rounded-md"
+                                inset={false}
                               >
                                 Delete
                               </DropdownMenuItem>

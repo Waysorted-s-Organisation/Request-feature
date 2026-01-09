@@ -20,13 +20,12 @@ export default function ProfileDropdown() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-58 mr-2 p-1">
+      <DropdownMenuContent className="w-fit-content  p-1">
         {/* Username + Email */}
         <DropdownMenuLabel className="flex flex-col items-start" inset={false}>
           <div className="flex gap-2">
 
             <div className="w-[36px] h-[36px] text-[#265BD1] bg-[#E8EFFC] rounded-md flex items-center justify-center">RG</div>
-
             <div>
               <p className="font-bold">USERNAME</p>
               <p className="text-xs text-gray-500">guptarishabh181@gmail.com</p>

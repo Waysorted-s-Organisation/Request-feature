@@ -5,7 +5,7 @@ import Main from '../components/Main';
 
 const Page: React.FC = () => {
   return (
-    <div className="h-screen w-7xl flex flex-col">
+    <div className="h-screen flex flex-col">
       
       <div className="fixed top-0 left-0 w-full h-[68px] z-50">
         <Navbar />
@@ -18,7 +18,7 @@ const Page: React.FC = () => {
         </div>
 
         
-        <div className="ml-[225px] flex-1 overflow-y-auto h-[calc(100vh-68px)] px-4">
+        <div className="ml-[225px] flex-1 overflow-y-auto h-[calc(100vh-68px)]">
           <Main />
         </div>
       </div>

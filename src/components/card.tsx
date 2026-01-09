@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import Chat from "./chat";
 import { EllipsisIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { DropdownMenuItem } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 interface CardProps {
   title: string;
@@ -36,17 +35,17 @@ const Card: React.FC<CardProps> = ({ title, description, details, status, votes 
   const formattedCount: string = String(count).padStart(2, "0");
 
   return (
-    <div className="flex h-[109px] w-full max-w-[791px] border-b border-gray-200 items-center">
+    <div className="hover:bg-[#e4e4e4] rounded-sm duration-200 ease-in-out pl-6 flex h-[109px] w-full border-b border-gray-200 items-center">
       {/* Upvote box */}
       <div
         onClick={() => {
           setCount(isUpvoted ? count - 1 : count + 1);
           setIsUpvoted(!isUpvoted);
         }}
-        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group
-        ${isUpvoted ? "border-[#265BD1] bg-[#E8EFFC]" : "border-[#565A5E] bg-white"}`}
+        className={`w-[54px] h-[54px] cursor-pointer border rounded-md flex flex-col items-center justify-center group transition-colors
+        ${isUpvoted ? "border-[#265BD1] bg-[#E8EFFC]" : "border-[#565A5E] bg-white hover:border-[#265BD1]"}`}
       >
-        <i className="fa-solid fa-caret-up text-xl text-[#265BD1] group-hover:-translate-y-1"></i>
+        <i className={`fa-solid fa-caret-up text-xl transition-colors group-hover:-translate-y-1 ${isUpvoted ? "text-[#265BD1]" : "text-[#565A5E] group-hover:text-[#265BD1]"}`}></i>
         <p className="text-black">{formattedCount}</p>
       </div>
 

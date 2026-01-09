@@ -94,7 +94,9 @@ const BugUploadDialog: React.FC<BugUploadDialogProps> = ({ open, onOpenChange })
           </DialogTitle>
         </DialogHeader>
 
-        <Separator className="" />
+        <div className="relative -mx-6 h-px">
+          <Separator className="absolute inset-x-0" />
+        </div>
 
         <div className="flex flex-col gap-4">
           <p className="text-sm font-medium">Upload and attach files</p>
@@ -252,7 +254,9 @@ const Navbar = () => {
               </DialogTitle>
             </DialogHeader>
 
-            <Separator className="" />
+            <div className="relative -mx-6 h-px">
+              <Separator className="absolute inset-x-0" />
+            </div>
 
             <div className="space-y-4">
               <div className="space-y-2">
@@ -344,7 +348,9 @@ const Navbar = () => {
                 Request a feature or report a bug
               </DialogTitle>
             </DialogHeader>
-            <Separator className="" />
+            <div className="relative -mx-6 h-px">
+              <Separator className="absolute inset-x-0" />
+            </div>
             <div className="flex flex-col items-center ">
               <img
                 src="/success.svg"
